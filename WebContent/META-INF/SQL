@@ -1,0 +1,348 @@
+/*基本表*/
+CREATE TABLE department (
+	Dno	CHAR(3) PRIMARY KEY,
+  Dname	VARCHAR(4) NOT NULL,
+  Dman	VARCHAR(4) NOT NULL
+);
+
+INSERT INTO department VALUES('d1','安保部','张队长');
+INSERT INTO department VALUES('d2','保洁部','李队长');
+INSERT INTO department VALUES('d3','维修部','王队长');
+
+CREATE TABLE build (
+	Lid	CHAR(2) PRIMARY KEY,
+	Lname CHAR(3) NOT NULL,
+  Lnum	VARCHAR(2) NOT NULL,
+  Ldata CHAR(10) NOT NULL
+);
+
+INSERT INTO build VALUES('#1','1单元','6','2010-03-01');
+INSERT INTO build VALUES('#2','2单元','6','2010-03-02');
+INSERT INTO build VALUES('#3','3单元','6','2010-03-03');
+
+CREATE TABLE room (
+  Lid	CHAR(2),
+	Fid	CHAR(3),
+  Yn	CHAR(1)NOT NULL,
+  Yare CHAR(4)NOT NULL,
+	Yid CHAR(8),
+	PRIMARY KEY (Fid, Lid)
+);
+
+
+INSERT INTO room VALUES('#1','101','是','120平','20170000');
+INSERT INTO room VALUES('#1','201','是','100平','20170001');
+INSERT INTO room VALUES('#1','301','是','100平','20170002');
+INSERT INTO room VALUES('#1','401','否','100平',null);
+INSERT INTO room VALUES('#1','501','否','100平',null);
+INSERT INTO room VALUES('#1','601','否','100平',null);
+
+
+INSERT INTO room VALUES('#2','101','是','120平','20180000');
+INSERT INTO room VALUES('#2','201','是','100平','20180001');
+INSERT INTO room VALUES('#2','301','是','100平','20180002');
+INSERT INTO room VALUES('#2','401','否','100平',null);
+INSERT INTO room VALUES('#2','501','否','100平',null);
+INSERT INTO room VALUES('#2','601','否','100平',null);
+
+INSERT INTO room VALUES('#3','101','是','120平','20190000');
+INSERT INTO room VALUES('#3','201','是','100平','20190001');
+INSERT INTO room VALUES('#3','301','是','100平','20190002');
+INSERT INTO room VALUES('#3','401','否','100平',null);
+INSERT INTO room VALUES('#3','501','否','100平',null);
+INSERT INTO room VALUES('#3','601','否','100平',null);
+
+CREATE TABLE owners (
+ Yid	CHAR(8) PRIMARY KEY,
+ Yname	VARCHAR(4) NOT NULL,
+ Ysex	CHAR(1) NOT NULL,
+ Ytel	CHAR(11) NOT NULL,
+ Ytim	CHAR(10) NOT NULL,
+ Fid	CHAR(3) NOT NULL,
+ Lid	CHAR(2) NOT NULL
+
+);
+INSERT INTO owners VALUES('20170000','张一','男','11111111110','2017-01-01','101','#1');
+INSERT INTO owners VALUES('20170001','张二','男','11111111111','2017-01-02','201','#1');
+INSERT INTO owners VALUES('20170002','张三','男','11111111112','2017-01-03','301','#1');
+
+
+INSERT INTO owners VALUES('20180000','李一','女','21111111110','2018-01-01','101','#2');
+INSERT INTO owners VALUES('20180001','李二','女','21111111111','2018-01-02','201','#2');
+INSERT INTO owners VALUES('20180002','李三','女','21111111112','2018-01-03','301','#2');
+
+INSERT INTO owners VALUES('20190000','王一','女','31111111110','2019-02-01','101','#3');
+INSERT INTO owners VALUES('20190001','王二','女','31111111111','2019-02-02','201','#3');
+INSERT INTO owners VALUES('20190002','王三','女','31111111112','2019-02-03','301','#3');
+
+CREATE TABLE worker (
+ Gid CHAR(8) PRIMARY KEY,
+ Gname VARCHAR(4) NOT NULL,
+ Gsex	CHAR(1) NOT NULL,
+ Gtel	CHAR(11) NOT NULL,
+ Gdate CHAR(10) NOT NULL,
+ Gads	VARCHAR(7) NOT NULL,
+ Gword	VARCHAR(3) NOT NULL,
+ Seleary	VARCHAR(6) NOT NULL,
+ Dno	CHAR(3) NOT NULL
+);
+
+INSERT INTO worker VALUES('30170000','赵一','男','41111111110','2017-01-01','哈尔滨市南岗区','保安','2000/月','d1');
+INSERT INTO worker VALUES('30170001','赵二','男','41111111111','2017-01-02','哈尔滨市南岗区','保安','2000/月','d1');
+INSERT INTO worker VALUES('30170002','赵三','男','41111111112','2017-01-03','哈尔滨市南岗区','保安','2000/月','d1');
+
+INSERT INTO worker VALUES('30180000','林一','男','51111111110','2018-01-01','哈尔滨市道外区','保洁','3000/月','d2');
+INSERT INTO worker VALUES('30180001','林二','男','51111111111','2018-01-02','哈尔滨市道外区','保洁','3000/月','d2');
+INSERT INTO worker VALUES('30180002','林三','男','51111111112','2018-01-03','哈尔滨市道外区','保洁','3000/月','d2');
+
+INSERT INTO worker VALUES('30190000','林一','女','61111111110','2019-01-01','哈尔滨市香坊区','维修','4000/月','d3');
+INSERT INTO worker VALUES('30190001','林二','女','61111111111','2019-01-02','哈尔滨市香坊区','维修','4000/月','d3');
+INSERT INTO worker VALUES('30190002','林三','女','61111111112','2019-01-03','哈尔滨市香坊区','维修','4000/月','d3');
+
+
+CREATE TABLE fbill (
+  Jid	CHAR(3) PRIMARY KEY,
+	Yid	CHAR(8) NOT NULL,	
+  Type CHAR(4) NOT NULL,
+  Date	CHAR(20) NOT NULL,
+  Mon	CHAR(3) NOT NULL
+ 
+);
+INSERT INTO fbill VALUES('1','20170000','水费','2017-01-01 10:20:32','100');
+INSERT INTO fbill VALUES('2','20170001','电费','2017-01-02 10:20:32','200');
+INSERT INTO fbill VALUES('3','20170002','气费','2017-01-03 10:20:32','300');
+INSERT INTO fbill VALUES('4','20170000','气费','2017-01-03 10:20:32','300');
+INSERT INTO fbill VALUES('5','20170000','煤费','2017-01-03 10:20:32','300');
+INSERT INTO fbill VALUES('6','20180000','煤费','2017-01-03 10:20:32','300');
+INSERT INTO fbill VALUES('7','20180000','煤费','2017-01-03 10:20:32','300');
+
+CREATE TABLE defend (
+   Gid	CHAR(8),
+   Lid	CHAR(2),
+   PRIMARY KEY (Gid, Lid)
+);
+INSERT INTO defend VALUES('30170000','#1');
+INSERT INTO defend VALUES('30170000','#2');
+INSERT INTO defend VALUES('30170000','#3');
+
+INSERT INTO defend VALUES('30170001','#1');
+INSERT INTO defend VALUES('30170001','#2');
+INSERT INTO defend VALUES('30170001','#3');
+
+INSERT INTO defend VALUES('30170002','#1');
+INSERT INTO defend VALUES('30170002','#2');
+INSERT INTO defend VALUES('30170002','#3');
+
+INSERT INTO defend VALUES('30180000','#1');
+INSERT INTO defend VALUES('30180000','#2');
+INSERT INTO defend VALUES('30180000','#3');
+
+INSERT INTO defend VALUES('30180001','#1');
+INSERT INTO defend VALUES('30180001','#2');
+INSERT INTO defend VALUES('30180001','#3');
+
+INSERT INTO defend VALUES('30180002','#1');
+INSERT INTO defend VALUES('30180002','#2');
+INSERT INTO defend VALUES('30180002','#3');
+
+INSERT INTO defend VALUES('30190000','#1');
+INSERT INTO defend VALUES('30190000','#2');
+INSERT INTO defend VALUES('30190000','#3');
+
+INSERT INTO defend VALUES('30190001','#1');
+INSERT INTO defend VALUES('30190001','#2');
+INSERT INTO defend VALUES('30190001','#3');
+
+INSERT INTO defend VALUES('30190002','#1');
+INSERT INTO defend VALUES('30190002','#2');
+INSERT INTO defend VALUES('30190002','#3');
+
+CREATE TABLE users (
+   account CHAR(8) PRIMARY KEY,
+	 pasword CHAR(6) NOT NULL,
+	 identity CHAR(2) NOT NULL
+);
+INSERT INTO users VALUES('30170000','123456','员工');
+INSERT INTO users VALUES('30180000','123456','员工');
+INSERT INTO users VALUES('30190000','123456','员工');
+
+
+INSERT INTO users VALUES('20170000','654321','业主');
+
+INSERT INTO users VALUES('20170001','654321','业主');
+INSERT INTO users VALUES('20170002','654321','业主');
+
+INSERT INTO users VALUES('20180000','123456','业主');
+INSERT INTO users VALUES('20180001','123456','业主');
+INSERT INTO users VALUES('20180002','123456','业主');
+
+
+INSERT INTO users VALUES('20190000','123456','业主');
+INSERT INTO users VALUES('20190001','123456','业主');
+INSERT INTO users VALUES('20190002','123456','业主');
+
+CREATE TABLE baocuo (
+   Bid VARCHAR(3) PRIMARY KEY,
+	 Id VARCHAR(8) not null,
+	 Wz VARCHAR(20)  not null,
+	 Zq VARCHAR(20) not null, 
+	  Sf VARCHAR(3) not null 
+);
+INSERT INTO baocuo VALUES('0','30170000','电话号','123456789','员工');
+INSERT INTO baocuo VALUES('2','30170001','电话号','123456789','员工');
+INSERT INTO baocuo VALUES('3','30170001','电话号','123456789','员工');
+INSERT INTO baocuo VALUES('4','30170001','电话号','123456789','员工');
+INSERT INTO baocuo VALUES('5','30170001','电话号','123456789','员工');
+INSERT INTO baocuo VALUES('6','30170001','电话号','123456789','员工');
+
+
+
+
+/*视图*/
+
+
+CREATE VIEW Yview
+AS
+SELECT Jid,fbill.Yid,Yname,Type,Date,Mon
+FROM owners,fbill
+WHERE owners.Yid=fbill.Yid;
+
+CREATE VIEW Gview
+AS
+SELECT defend.Gid,Gname,Gword,Lid
+FROM defend,worker
+WHERE defend.Gid=worker.Gid;
+
+CREATE VIEW Glyview
+AS
+SELECT Jid,fbill.Yid,Yname,Type,Date,Ytel,Mon,build.Lname,owners.Fid
+FROM build,owners,fbill
+WHERE fbill.Yid=owners.Yid AND owners.Lid=build.Lid;
+
+
+/*存储过程*/
+DROP PROCEDURE IF EXISTS p; 
+CREATE PROCEDURE p()
+BEGIN
+SELECT COUNT(Yn)
+FROM room
+WHERE Yn='否';
+END
+
+CALL p()
+
+
+DROP PROCEDURE  yzxinxi;
+ 
+DROP PROCEDURE IF EXISTS yzxinxi;
+CREATE PROCEDURE yzxinxi()
+BEGIN
+DECLARE yid CHAR(8);
+DECLARE yname VARCHAR(4);
+DECLARE ysex CHAR(1);
+DECLARE ytel CHAR(11);
+DECLARE ytim CHAR(10);
+DECLARE lname CHAR(3);
+DECLARE fid CHAR(3);
+DECLARE done INT DEFAULT FALSE;
+DECLARE cur CURSOR FOR 
+SELECT owners.Yid,owners.Yname,owners.Ysex,owners.Ytel,owners.Ytim,build.Lname,owners.Fid
+FROM owners ,build
+WHERE owners.Lid=build.Lid;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=TRUE;
+CREATE TEMPORARY TABLE IF NOT EXISTS yzform( yid CHAR(8),yname VARCHAR(4), ysex CHAR(1),ytel CHAR(11),ytim CHAR(10),lname CHAR(3),fid CHAR(3));
+TRUNCATE TABLE yzform;
+OPEN cur;
+FETCH cur INTO  yid , yname , ysex , ytel , ytim , lname ,fid ; 
+WHILE(NOT done)DO
+INSERT INTO yzform VALUES(yid , yname , ysex , ytel , ytim , lname ,fid);
+FETCH cur INTO  yid , yname , ysex , ytel , ytim , lname ,fid ;
+END WHILE;
+CLOSE cur;
+SELECT * FROM yzform;
+END
+
+CALL yzxinxi();
+
+
+DROP PROCEDURE IF EXISTS updateroom; 
+CREATE PROCEDURE updateroom(in lid char(2),in oldfid char(3),in newfid char(3))
+BEGIN
+UPDATE owners
+SET Fid=newfid
+WHERE Lid=lid AND Fid=oldfid;
+END
+
+CALL updateroom('#1','801','701');
+
+
+/*触发器*/
+1.create trigger build_update
+after update on build
+for each row
+update room set room.Lid=new.Lid where room.Lid=old.Lid;
+
+2.create trigger buildd_update
+after update on build
+for each row
+update owners set owners.Lid=new.Lid where owners.Lid=old.Lid;
+
+3.create trigger builddd_update
+after update on builds
+for each row
+update defend set defend.Lid=new.Lid where defend.Lid=old.Lid;
+
+
+4.create trigger worker_delete
+after delete on worker
+for each row
+delete from defend where Gid=old.Gid;
+
+5.create trigger worker_update
+after update on worker
+for each row
+update defend set defend.Gid=new.Gid where defend.Gid=old.Gid;
+
+
+6.create trigger owners_delete
+after delete on owners
+for each row
+update room set Yn='否',room.Yid=null where room.Yid=old.Yid;
+
+7.create trigger owners_insert
+after insert on owners
+for each row
+update room set Yn='是' ,room.Yid=new.Yid where room.Fid=new.Fid and room.Lid in(select Lid from owners where owners.Lid=new.Lid );
+
+
+8.create trigger room_update
+after update on room
+for each row
+update owners set Fid=new.Fid where owners.Yid in (select Yid from room where room.Yid=old.Yid);
+
+9.create trigger update_owners
+after update on owners
+for each row
+update room set Yid=new.Yid where room.Yid=old.Yid;
+
+10.create trigger update_department
+after update on department
+for each row
+update worker set Dno=new.Dno where worker.Dno=old.Dno;
+
+11.create trigger delete_owners
+after delete on owners
+for each row
+delete from fbill  where fbill.Yid=old.Yid;
+
+12.create trigger updatee_owners
+after update on owners
+for each row
+update fbill set Yid=new.Yid where fbill.Yid=old.Yid;
+
+
+
+
+
+
+
